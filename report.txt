@@ -1,0 +1,16 @@
+Wczytano 12
+Najlepszy wynik osiagnal Kamil Zielinski, zdobyl 100 punktow z przedmiotu: Mathematics, data: 2024-01-15
+Srednia ocen studenta o ID- S-1 to: 84.33
+Srednia ocen studenta o ID- S-1 to: 84.33
+
+Wyniki miedzy 2024-01-15 a 2024-02-01 :Jan Kowalski ID: 1, wynik: 88, data: 2024-01-15
+Anna Nowak ID: 2, wynik: 95, data: 2024-01-15
+Kamil Zielinski ID: 4, wynik: 100, data: 2024-01-15
+Ola Wojcik ID: 3, wynik: 45, data: 2024-01-18
+Jan Kowalski ID: 1, wynik: 74, data: 2024-01-20
+Kamil Zielinski ID: 4, wynik: 100, data: 2024-01-20
+Anna Nowak ID: 2, wynik: 82, data: 2024-01-25
+Ola Wojcik ID: 3, wynik: 60, data: 2024-01-25
+Jan Kowalski ID: 1, wynik: 91, data: 2024-02-01
+Anna Nowak ID: 2, wynik: 89, data: 2024-02-01
+Kamil Zielinski ID: 4, wynik: 100, data: 2024-02-01
