@@ -3,10 +3,10 @@ package org.example;
 import java.time.LocalDate;
 
 public class ExamResult {
-    Student student;
-    Subject subject;
-    int score;
-    LocalDate date;
+    private Student student;
+    private Subject subject;
+    private int score;
+    private LocalDate date;
 
     public ExamResult(Student student, Subject subject, int score, LocalDate date) {
         this.student = student;

@@ -115,17 +115,17 @@ public class Main {
 //        średnią dla S-1
 //        listę wyników z zakresu dat (punkt D)
 
-        resultsExam = resultsExam.stream().filter(n -> !n.subject.equals(Subject.HISTORY)).toList();
+        resultsExam = resultsExam.stream().filter(n -> !n.getSubject().equals(Subject.HISTORY)).toList();
         Optional<ExamResult> bestResult = resultsExam.stream().max(Comparator.comparing(ExamResult::getScore));
-        List<ExamResult> wynikiStudentaS1 = resultsExam.stream().filter(n -> n.student.id == 1).toList();
-        double sum = wynikiStudentaS1.stream().mapToDouble(n -> n.score).sum();
+        List<ExamResult> wynikiStudentaS1 = resultsExam.stream().filter(n -> n.getStudent().getId() == 1).toList();
+        double sum = wynikiStudentaS1.stream().mapToDouble(ExamResult::getScore).sum();
         BigDecimal average = BigDecimal.valueOf(sum / wynikiStudentaS1.size());
-        List<ExamResult> resultFromPeriod = resultsExam.stream().filter(n -> n.date.isBefore(LocalDate.of(2024, 2, 2))
-                && n.date.isAfter(LocalDate.of(2024, 1, 14))).sorted(Comparator.comparing(n -> n.date)).toList();
+        List<ExamResult> resultFromPeriod = resultsExam.stream().filter(n -> n.getDate().isBefore(LocalDate.of(2024, 2, 2))
+                && n.getDate().isAfter(LocalDate.of(2024, 1, 14))).sorted(Comparator.comparing(ExamResult::getDate)).toList();
 
 
         System.out.println("\nWczytano " + resultsExam.size());
-        System.out.println("Najlepszy wynik osiagnal " + bestResult.get().student.getName() + ", zdobyl " + bestResult.get().getScore() + " punktow z przedmiotu: " + bestResult.get().subject.getDisplayName() + ", data: " + bestResult.get().getDate());
+        System.out.println("Najlepszy wynik osiagnal " + bestResult.get().getStudent().getName() + ", zdobyl " + bestResult.get().getScore() + " punktow z przedmiotu: " + bestResult.get().getSubject().getDisplayName() + ", data: " + bestResult.get().getDate());
         System.out.println("Srednia ocen studenta o ID- S-1 to: " + average.setScale(2, RoundingMode.HALF_UP));
 
 
@@ -137,20 +137,17 @@ public class Main {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("report.txt"))) {
             writer.write("Wczytano " + resultsExam.size());
             writer.newLine();
-            writer.write("Najlepszy wynik osiagnal " + bestResult.get().student.getName() + ", zdobyl " + bestResult.get().getScore() + " punktow z przedmiotu: " + bestResult.get().subject.getDisplayName() + ", data: " + bestResult.get().getDate());
-            writer.newLine();
-            writer.write("Srednia ocen studenta o ID- S-1 to: " + average.setScale(2, RoundingMode.HALF_UP));
+            writer.write("Najlepszy wynik osiagnal " + bestResult.get().getStudent().getName() + ", zdobyl " + bestResult.get().getScore() + " punktow z przedmiotu: " + bestResult.get().getSubject().getDisplayName() + ", data: " + bestResult.get().getDate());
             writer.newLine();
             writer.write("Srednia ocen studenta o ID- S-1 to: " + average.setScale(2, RoundingMode.HALF_UP));
             writer.newLine();
             System.out.println("\nWyniki miedzy 2024-01-15 a 2024-02-01 :");
             writer.write("\nWyniki miedzy 2024-01-15 a 2024-02-01 :");
             for (ExamResult wynik : resultFromPeriod) {
-                System.out.println(wynik.student.getName() + " ID: " + wynik.student.getId() + ", wynik: " + wynik.score + ", data: " + wynik.date);
-                writer.write(wynik.student.getName() + " ID: " + wynik.student.getId() + ", wynik: " + wynik.score + ", data: " + wynik.date);
+                System.out.println(wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
+                writer.write(wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
                 writer.newLine();
             }
-            writer.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
