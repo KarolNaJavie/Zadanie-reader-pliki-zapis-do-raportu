@@ -133,6 +133,8 @@ public class Main {
 //            System.out.println(wynik.student.getName() + " ID: " + wynik.student.getId() + ", wynik: " + wynik.score + ", data: " + wynik.date);
 //        }
 
+        String periodResults = ("\nWyniki miedzy 2024-01-15 a 2024-02-01 :");
+
         //zapis do raportu
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("report.txt"))) {
             writer.write("Wczytano " + resultsExam.size());
@@ -141,11 +143,12 @@ public class Main {
             writer.newLine();
             writer.write("Srednia ocen studenta o ID- S-1 to: " + average.setScale(2, RoundingMode.HALF_UP));
             writer.newLine();
-            System.out.println("\nWyniki miedzy 2024-01-15 a 2024-02-01 :");
-            writer.write("\nWyniki miedzy 2024-01-15 a 2024-02-01 :");
+            System.out.println(periodResults);
+            writer.write(periodResults);
             for (ExamResult wynik : resultFromPeriod) {
-                System.out.println(wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() + ", przedmiot: "+ wynik.getSubject().getDisplayName() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
-                writer.write(wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() +  ", przedmiot: "+ wynik.getSubject().getDisplayName() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
+                String resultsData = (wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() + ", przedmiot: "+ wynik.getSubject().getDisplayName() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
+                System.out.println(resultsData);
+                writer.write(resultsData);
                 writer.newLine();
             }
         } catch (IOException e) {
