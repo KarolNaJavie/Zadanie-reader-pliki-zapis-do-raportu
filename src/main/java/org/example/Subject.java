@@ -3,8 +3,8 @@ package org.example;
 public enum Subject {
     MATH("Mathematics"),
     JAVA("Java"),
-    ENGLISH("English"),
-    HISTORY("History");
+    ENGLISH("English");
+//    HISTORY("History");
 
     private final String displayName;
 

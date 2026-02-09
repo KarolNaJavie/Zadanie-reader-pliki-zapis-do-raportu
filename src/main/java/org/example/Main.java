@@ -115,7 +115,7 @@ public class Main {
 //        średnią dla S-1
 //        listę wyników z zakresu dat (punkt D)
 
-        resultsExam = resultsExam.stream().filter(n -> !n.getSubject().equals(Subject.HISTORY)).toList();
+//        resultsExam = resultsExam.stream().filter(n -> !n.getSubject().equals(Subject.HISTORY)).toList();
         Optional<ExamResult> bestResult = resultsExam.stream().max(Comparator.comparing(ExamResult::getScore));
         List<ExamResult> wynikiStudentaS1 = resultsExam.stream().filter(n -> n.getStudent().getId() == 1).toList();
         double sum = wynikiStudentaS1.stream().mapToDouble(ExamResult::getScore).sum();
@@ -144,8 +144,8 @@ public class Main {
             System.out.println("\nWyniki miedzy 2024-01-15 a 2024-02-01 :");
             writer.write("\nWyniki miedzy 2024-01-15 a 2024-02-01 :");
             for (ExamResult wynik : resultFromPeriod) {
-                System.out.println(wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
-                writer.write(wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
+                System.out.println(wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() + ", przedmiot: "+ wynik.getSubject().getDisplayName() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
+                writer.write(wynik.getStudent().getName() + " ID: " + wynik.getStudent().getId() +  ", przedmiot: "+ wynik.getSubject().getDisplayName() + ", wynik: " + wynik.getScore() + ", data: " + wynik.getDate());
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -157,7 +157,12 @@ public class Main {
         if (line != null) {
             Pattern pattern = Pattern.compile("S-(\\d+);([^;]+);(\\w+);(\\d+);(\\d{4})-(\\d{2})-(\\d{2})");
             Matcher matcher = pattern.matcher(line);
-            if (matcher.find() && (Integer.parseInt(matcher.group(7).trim()) < 32) && (Integer.parseInt(matcher.group(6).trim()) < 13) && (Integer.parseInt(matcher.group(4).trim()) <= 100) && (Integer.parseInt(matcher.group(4).trim()) >= 0)) {
+            if (matcher.find()
+                    && (Integer.parseInt(matcher.group(7).trim()) < 32)
+                    && (Integer.parseInt(matcher.group(6).trim()) < 13)
+                    && (Integer.parseInt(matcher.group(4).trim()) <= 100)
+                    && (Integer.parseInt(matcher.group(4).trim()) >= 0)
+                    && ((matcher.group(3).trim().equalsIgnoreCase("MATH")) || (matcher.group(3).trim().equalsIgnoreCase("JAVA")) || (matcher.group(3).trim().equalsIgnoreCase("ENGLISH")))) {
                 Student student = new Student(Integer.parseInt(matcher.group(1).trim()), matcher.group(2).trim());
                 LocalDate date = LocalDate.of(Integer.parseInt(matcher.group(5).trim()), Integer.parseInt(matcher.group(6).trim()), Integer.parseInt(matcher.group(7).trim()));
                 return new ExamResult(student, Subject.valueOf(matcher.group(3).trim()), Integer.parseInt(matcher.group(4).trim()), date);
